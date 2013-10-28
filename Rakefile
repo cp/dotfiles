@@ -57,4 +57,8 @@ task :uninstall do
   end
 end
 
+task :osx do
+    `bash ~/.osx`
+end
+
 task :default => 'install'
