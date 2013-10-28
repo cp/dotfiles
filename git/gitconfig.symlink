@@ -1,0 +1,16 @@
+[user]
+  name = Colby Aley
+  email = colby@aley.me
+[color]
+  ui = true
+[alias]
+  pop = reset --soft HEAD~1
+  ci = commit
+  co = checkout
+  br = branch
+  st = status
+  a = add
+  d = rm
+  sh = show
+[core]
+  excludesfile = ~/.gitignore
