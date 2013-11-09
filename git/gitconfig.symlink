@@ -14,3 +14,5 @@
   sh = show
 [core]
   excludesfile = ~/.gitignore
+[init]
+	templatedir = ~/.git-templates
