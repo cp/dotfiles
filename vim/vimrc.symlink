@@ -1,4 +1,5 @@
 syntax on
+execute pathogen#infect()
 autocmd vimenter * NERDTree
 autocmd Vimenter * wincmd p
 filetype plugin plugin on
@@ -8,6 +9,7 @@ set nowrap
 set smarttab
 set expandtab
 set tabstop=2
+set softtabstop=2
 colorscheme solarized
 let g:solarized_termcolors=256
 
