@@ -1,7 +1,15 @@
 syntax on
-set tabstop=2
 autocmd vimenter * NERDTree
 autocmd Vimenter * wincmd p
+filetype plugin plugin on
+filetype plugin indent on
+set sw=2
+set nowrap
+set smarttab
+set expandtab
+set tabstop=2
+colorscheme solarized
+let g:solarized_termcolors=256
 
 function! NERDTreeQuit()
   redir => buffersoutput
