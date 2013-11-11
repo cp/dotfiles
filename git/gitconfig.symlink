@@ -16,3 +16,5 @@
   excludesfile = ~/.gitignore
 [init]
 	templatedir = ~/.git-templates
+[push]
+	default = matching
