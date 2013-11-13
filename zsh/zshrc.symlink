@@ -8,7 +8,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="ca"
 
 # Git aliases
-alias push="git push origin master && git push heroku master"
+alias hpush="git push origin master && git push heroku master"
 
 alias zshconfig="subl ~/.zshrc"
 alias ohmyzsh="subl ~/.oh-my-zsh"
