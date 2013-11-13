@@ -12,6 +12,7 @@
   a = add
   d = rm
   sh = show
+  pr = !git push origin $(git rev-parse --abbrev-ref HEAD) && open http://github.com/cloudability/$(basename $PWD)/compare/master...$(git rev-parse --abbrev-ref HEAD)
 [core]
   excludesfile = ~/.gitignore
 [init]
