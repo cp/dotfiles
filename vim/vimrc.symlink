@@ -1,5 +1,6 @@
 syntax on
 execute pathogen#infect()
+autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd vimenter * NERDTree
 autocmd Vimenter * wincmd p
 filetype plugin plugin on
