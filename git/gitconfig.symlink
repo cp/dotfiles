@@ -12,6 +12,8 @@
   a = add
   d = rm
   sh = show
+  gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
+  hpush = !git push origin master && git push heroku master
   pr = !git push origin $(git rev-parse --abbrev-ref HEAD) && open http://github.com/cloudability/$(basename $PWD)/compare/master...$(git rev-parse --abbrev-ref HEAD)
 [core]
   excludesfile = ~/.gitignore
