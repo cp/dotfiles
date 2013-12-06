@@ -14,6 +14,9 @@ set softtabstop=2
 colorscheme solarized
 let g:solarized_termcolors=256
 
+nmap <silent> <a-Left> :wincmd h<CR>
+nmap <silent> <a-Right> :wincmd l<CR>
+
 function! NERDTreeQuit()
   redir => buffersoutput
   silent buffers
