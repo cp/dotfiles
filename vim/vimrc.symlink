@@ -14,6 +14,10 @@ set softtabstop=2
 colorscheme solarized
 let g:solarized_termcolors=256
 
+" Show tabs and trailing whitespaces
+set list
+set lcs=tab:>>
+set lcs+=trail:.
 nmap <silent> <a-Left> :wincmd h<CR>
 nmap <silent> <a-Right> :wincmd l<CR>
 
