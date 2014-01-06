@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+# -*- encoding: utf-8 -*-
+
+require 'terminal-table'
+require 'json'
+
+#
+# USAGE: `ruby log.rb [HEROKU_APP_NAME]`
+#
+
+app = ARGV[0]
+rows = `heroku logs -a #{app} -s heroku -n 200`.split("\n")
+$log = Array.new
+
+rows.each do |row|
+  title = row.split(" ")[0..1].join(" ")
+  next unless title.include?("heroku[web") # We only want logplex entries for web dynos for now.
+  hash = Hash[:title, title]
+  words = row.split(" ")[2..-1]
+  words.each do |word|
+    split_word = word.split("=")
+    hash.merge!(split_word[0] => split_word[1])
+  end
+  $log << hash
+end
+
+def get_range(array)
+  range = array.max - array.min
+  range.round(2)
+end
+
+def get_avg(array)
+  avg = array.inject{ |sum, el| sum + el }.to_f / array.size
+  avg.round(2)
+end
+
+def memories
+  memories = Array.new
+  $log.each do |entry|
+    next unless entry["sample#memory_total"]
+    memories << entry["sample#memory_total"][0..-3].to_f
+  end
+  memories
+end
+
+def load_average
+  avgs = Hash.new
+  $log.each do |entry|
+    next unless entry["sample#load_avg_1m"]
+    avgs.merge!("1m" => entry["sample#load_avg_1m"])
+    avgs.merge!("5m" => entry["sample#load_avg_5m"])
+    avgs.merge!("15m" => entry["sample#load_avg_15m"])
+  end
+  avgs
+end
+
+rows = []
+rows << ['Memory', memories[-1]]
+rows << ['Average Memory', get_avg(memories)]
+rows << ['Memory Range', get_range(memories)]
+rows << ['Load Avg 1m', load_average["1m"]]
+rows << ['Load Avg 5m', load_average["5m"]]
+rows << ['Load Avg 15m', load_average["15m"]]
+rows << ['Data Points', $log.length]
+table = Terminal::Table.new(rows: rows, title: app)
+
+puts table

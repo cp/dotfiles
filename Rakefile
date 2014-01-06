@@ -1,4 +1,5 @@
 # Stolen from @ejfinneran who stole is from @holman.
+# Heavily modified to support extra scripts.
 
 require 'rake'
 
@@ -12,6 +13,8 @@ task :install do
   backup_all = false
 
   linkables.each do |linkable|
+    next if linkable.split('/').first == 'bin' # We'll install these seperately
+
     overwrite = false
     backup = false
 
@@ -38,7 +41,6 @@ task :install do
 end
 
 task :uninstall do
-
   Dir.glob('**/*.symlink').each do |linkable|
 
     file = linkable.split('/').last.split('.symlink').last
@@ -53,12 +55,24 @@ task :uninstall do
     if File.exists?("#{ENV["HOME"]}/.#{file}.backup")
       `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"` 
     end
-
   end
 end
 
-task :osx do
-    `bash ~/.osx`
+# I love writing little scripts to automate everyday tasks,
+# but hate having to use Github gist to sync between environments.
+# This makes that so much easier! Takes the bin directory in this repo
+# and symlinks all files to the bin folder, adding them to the path.
+desc "Hook all our binfiles into /usr/bin"
+task :binfiles do
+  binfiles = Dir.glob('bin/**{.symlink}')
+  # TODO: Worry about overwriting files. But for now, YOLO!
+
+  binfiles.each do |binfile|
+    target = '/usr/' + binfile.split('.symlink').last
+    `sudo ln -s "$PWD/#{binfile}" "#{target}"`
+    `sudo chmod +x #{target}`
+    puts "Symlinked #{binfile} to #{target}"
+  end
 end
 
 task :default => 'install'
