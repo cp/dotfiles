@@ -4,7 +4,7 @@
 [color]
   ui = true
 [alias]
-  up = push origin master
+  up = !git push origin $(git rev-parse --abbrev-ref HEAD)
   pop = reset --soft HEAD~1
   ci = commit
   co = checkout
