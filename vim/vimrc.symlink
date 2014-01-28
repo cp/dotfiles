@@ -3,7 +3,7 @@ execute pathogen#infect()
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd vimenter * NERDTree
 autocmd Vimenter * wincmd p
-filetype plugin plugin on
+filetype plugin on
 filetype plugin indent on
 set sw=2
 set nowrap
