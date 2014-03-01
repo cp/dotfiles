@@ -17,3 +17,4 @@ eval "$(hub alias -s)"
 export PATH=$PATH
 GOPATH=/Users/ca/sites/Go
 PATH="$PATH:$GOPATH/bin"
+PATH="$PATH:/Users/ca/npm/bin"
