@@ -6,6 +6,7 @@ autocmd vimenter * NERDTree
 autocmd Vimenter * wincmd p
 filetype plugin on
 filetype plugin indent on
+set clipboard=unnamed
 set sw=2
 set nowrap
 set smarttab
