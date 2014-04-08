@@ -15,6 +15,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 eval "$(hub alias -s)"
 export PATH=$PATH
-GOPATH=/Users/ca/sites/Go
-PATH="$PATH:$GOPATH/bin"
-PATH="$PATH:/Users/ca/npm/bin"
+export GOPATH=/Users/ca/sites/Go
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:/Users/ca/npm/bin"
