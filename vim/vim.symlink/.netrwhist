@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/Users/ca/.vimrc'
 let g:netrw_dirhist_2='/Users/ca'
 let g:netrw_dirhist_3='/Users/ca/Vagrant'
 let g:netrw_dirhist_4='/Users/ca/Sites/commitphotos'
+let g:netrw_dirhist_5='/Users/ca/Sites/Pourover/app/models'
