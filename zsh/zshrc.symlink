@@ -1,8 +1,8 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-
 ZSH_THEME="ca"
-DISABLE_AUTO_UPDATE="true" # Auto-updates are freaking awesome, but I'm using a forked version...
+export EDITOR="vim"
+DISABLE_AUTO_UPDAT=E"true" # Auto-updates are freaking awesome, but I'm using a forked version...
 DISABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(rails autojump git ruby brew bundler)
@@ -14,7 +14,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 eval "$(hub alias -s)"
-export PATH=$PATH
 export GOPATH=/Users/ca/sites/Go
+export PATH=$PATH
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/Users/ca/npm/bin"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

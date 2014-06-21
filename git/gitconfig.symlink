@@ -1,6 +1,6 @@
 [user]
-  name = Colby Aley
-  email = colby@aley.me
+	name = Colby Aley
+	email = colby@aley.me
 [color]
   ui = true
 [alias]
@@ -17,8 +17,10 @@
   hpush = !git push origin $(git rev-parse --abbrev-ref HEAD) && git push heroku master
   pr = !git push origin $(git rev-parse --abbrev-ref HEAD) && open http://github.com/cloudability/$(basename $PWD)/compare/master...$(git rev-parse --abbrev-ref HEAD)
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/ca/.gitignore_global
 [init]
 	templatedir = ~/.git-templates
 [push]
 	default = matching
+[rerere]
+	enabled = 1

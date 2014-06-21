@@ -1,3 +1,0 @@
-[submodule "zsh/oh-my-zsh.symlink"]
-	path = zsh/oh-my-zsh.symlink
-	url = git@github.com:ColbyAley/oh-my-zsh.git
