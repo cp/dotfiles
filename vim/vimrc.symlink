@@ -1,3 +1,4 @@
+set nocompatible
 syntax on
 execute pathogen#infect()
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -28,8 +29,10 @@ nnoremap ; :
 set list
 set lcs=tab:>>
 set lcs+=trail:.
-nmap <silent> <a-Left> :wincmd h<CR>
-nmap <silent> <a-Right> :wincmd l<CR>
+
+map <silent> T :NERDTreeToggle<CR>
+map <silent> <C-z> :wincmd h<CR>
+map <silent> <C-x> :wincmd l<CR>
 
 " Highlight all results when searching
 set hlsearch
