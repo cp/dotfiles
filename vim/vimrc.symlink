@@ -15,8 +15,12 @@ set smarttab
 set expandtab
 set tabstop=2
 set softtabstop=2
+set number
+
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=64
 colorscheme solarized
-let g:solarized_termcolors=256
 
 " Syntax checkers
 let g:syntastic_javascript_checkers=['jslint']
@@ -63,26 +67,9 @@ function! NERDTreeQuit()
 endfunction
 autocmd WinEnter * call NERDTreeQuit()
 
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusline guibg=DarkRed ctermfg=6 guifg=Black ctermbg=0
-  elseif a:mode == 'v'
-    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-  else
-    hi statusline guibg=Cyan ctermfg=1 guifg=Black ctermbg=0
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=Cyan ctermfg=8 guifg=White ctermbg=15
-
-" default the statusline to green when entering Vim
-hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
-
 set statusline+=%r               " Read only flag
 set statusline+=%f               " Filename
 set statusline+=@
 set statusline+=%{GitBranch()}
 set statusline+=%=              " Align things right
 set statusline+=Line:%l/%L[%p%%]
-
