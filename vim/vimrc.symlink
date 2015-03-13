@@ -17,9 +17,7 @@ set tabstop=2
 set softtabstop=2
 set number
 
-set t_Co=256
 set background=dark
-let g:solarized_termcolors=64
 colorscheme solarized
 
 " Syntax checkers

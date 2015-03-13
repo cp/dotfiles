@@ -13,10 +13,12 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 eval "$(hub alias -s)"
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 export EDITOR="vim"
 export PATH=$PATH
 export GOPATH=/Users/ca/sites/Go
 export PATH=$PATH
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/Users/ca/npm/bin"
+export PATH="$PATH:/Users/ca/eb"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
