@@ -65,6 +65,42 @@ function! NERDTreeQuit()
 endfunction
 autocmd WinEnter * call NERDTreeQuit()
 
+if bufname("%") != ".html"
+  " Keep lines under 80 columns
+  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+  match OverLength /\%81v.\+/
+  set colorcolumn=80
+end
+
+" highlight less files
+"
+if bufname("%") =~ ".less"
+  set ft=css
+end
+
+" highlight EJS files
+"
+if bufname("%") =~ ".ejs"
+  set ft=html
+end
+
+if bufname("%") =~ ".go$"
+  set tabstop=2 softtabstop=8 shiftwidth=2 noexpandtab
+  set nolist
+end
+
+if bufname("%") =~ "Makefile"
+  set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+end
+
+if bufname("%") =~ ".py"
+  set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+end
+
+if bufname("%") =~ ".java"
+  set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+end
+
 set statusline+=%r               " Read only flag
 set statusline+=%f               " Filename
 set statusline+=@

@@ -5,6 +5,8 @@
   ui = true
 [alias]
   up = !git push origin $(git rev-parse --abbrev-ref HEAD)
+  down = !git pull origin $(git rev-parse --abbrev-ref HEAD)
+  reuse = commit -a --amend -C HEAD
   pop = reset --soft HEAD~1
   ci = commit
   co = checkout
@@ -15,12 +17,14 @@
   sh = show
   gitconflict = !gitk --left-right HEAD...MERGE_HEAD
   hpush = !git push origin $(git rev-parse --abbrev-ref HEAD) && git push heroku master
-  pr = !git push origin $(git rev-parse --abbrev-ref HEAD) && open http://github.com/cloudability/$(basename $PWD)/compare/master...$(git rev-parse --abbrev-ref HEAD)
+  pr = !git push origin $(git rev-parse --abbrev-ref HEAD) && open http://github.com/webarmor/$(basename $PWD)/compare/master...$(git rev-parse --abbrev-ref HEAD)
+  amend = commit -a --amend
 [core]
-	excludesfile = /Users/ca/.gitignore_global
+  excludesfile = /Users/ca/.gitignore_global
+  editor = atom --wait
 [init]
-	templatedir = ~/.git-templates
+  templatedir = ~/.git-templates
 [push]
-	default = matching
+  default = matching
 [rerere]
-	enabled = 1
+  enabled = 1
