@@ -6,17 +6,16 @@ DISABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(rails autojump git ruby brew bundler)
 
-# Adding autojump / j
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
 source $ZSH/oh-my-zsh.sh
 
-# setup boot2docker
-eval `boot2docker shellinit 2>/dev/null`
+sha() {
+if [ -n "$1" ]; then
+  git rev-parse $1
+else
+  git rev-parse HEAD
+fi
+}
 
-source $HOME/Sites/immunio/immunio/build/venv/bin/activate
-
-# Customize to your needs...
 eval "$(hub alias -s)"
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 export EDITOR="vim"
@@ -28,3 +27,7 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/Users/ca/npm/bin"
 export PATH="$PATH:/Users/ca/eb"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export ZK_BIN_PATH=/Users/ca/Sites/immunio/kafka_2.10-0.8.2.1/bin/
+export KAFKA_BIN_PATH=/Users/ca/Sites/immunio/kafka_2.10-0.8.2.1/bin/

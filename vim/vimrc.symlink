@@ -3,7 +3,7 @@ syntax on
 execute pathogen#infect()
 autocmd BufRead,BufNewFile *.md setlocal spell
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 autocmd Vimenter * wincmd p
 filetype plugin on
 filetype plugin indent on
@@ -16,6 +16,8 @@ set expandtab
 set tabstop=2
 set softtabstop=2
 set number
+
+set rtp+=~/.fzf
 
 set background=dark
 colorscheme solarized
