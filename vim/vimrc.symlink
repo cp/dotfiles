@@ -1,13 +1,12 @@
+packloadall
 set nocompatible
 syntax on
-execute pathogen#infect()
 autocmd BufRead,BufNewFile *.md setlocal spell
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
-"autocmd vimenter * NERDTree
-autocmd Vimenter * wincmd p
+au BufNewFile,BufRead *.ts setlocal filetype=typescript
 filetype plugin on
 filetype plugin indent on
-set paste
+set backupcopy=yes
 set clipboard=unnamed
 set sw=2
 set nowrap
@@ -16,16 +15,25 @@ set expandtab
 set tabstop=2
 set softtabstop=2
 set number
-
-set rtp+=~/.fzf
+set backspace=indent,eol,start
+set winwidth=79
+set winheight=50
+set shell=/bin/zsh
+let ruby_space_errors = 1
 
 set background=dark
 colorscheme solarized
 
-" Syntax checkers
-let g:syntastic_javascript_checkers=['jslint']
-let g:syntastic_yaml_checkers=['jsyaml']
-let g:syntastic_ruby_checkers=['rubylint']
+" Ctrlp
+let g:ctrlp_tabpage_position = 'ac'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
+
+" Prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
 
 nnoremap zz ZZ " quickly save and quit out
 nnoremap ; :
@@ -35,37 +43,15 @@ set list
 set lcs=tab:>>
 set lcs+=trail:.
 
-map <silent> T :NERDTreeToggle<CR>
-map <silent> <C-z> :wincmd h<CR>
-map <silent> <C-x> :wincmd l<CR>
+map <C-n> :NERDTreeFind<CR>
+map <C-T> :NERDTreeFind<CR>
+map <C-.> :NERDTreeFind<CR>
+
+" Close all buffers
+nnoremap bq :bufdo q<CR>
 
 " Highlight all results when searching
 set hlsearch
-
-" NerdTree!
-function! NERDTreeQuit()
-  redir => buffersoutput
-  silent buffers
-  redir END
-"                     1BufNo  2Mods.     3File           4LineNo
-  let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
-  let windowfound = 0
-
-  for bline in split(buffersoutput, "\n")
-    let m = matchlist(bline, pattern)
-
-    if (len(m) > 0)
-      if (m[2] =~ '..a..')
-        let windowfound = 1
-      endif
-    endif
-  endfor
-
-  if (!windowfound)
-    quitall
-  endif
-endfunction
-autocmd WinEnter * call NERDTreeQuit()
 
 if bufname("%") != ".html"
   " Keep lines under 80 columns
@@ -103,9 +89,25 @@ if bufname("%") =~ ".java"
   set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 end
 
-set statusline+=%r               " Read only flag
-set statusline+=%f               " Filename
-set statusline+=@
-set statusline+=%{GitBranch()}
-set statusline+=%=              " Align things right
-set statusline+=Line:%l/%L[%p%%]
+if bufname("%") =~ ".rb"
+  set autoindent
+  set tabstop=2 softtabstop=4 shiftwidth=2 expandtab
+end
+
+" Close NERDTree when last buffer is closed
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+
+let g:airline_theme='solarized'
+let gairline_solarized_bg='dark'

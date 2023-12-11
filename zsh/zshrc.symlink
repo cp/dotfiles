@@ -1,10 +1,11 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="ca"
-DISABLE_AUTO_UPDAT=E"true" # Auto-updates are freaking awesome, but I'm using a forked version...
+ZSH_THEME="robbyrussell"
 DISABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
-plugins=(rails autojump git ruby brew bundler)
+GPG_TTY=$(tty)
+plugins=(git ruby brew bundler)
+eval "$(rbenv init -)"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -17,17 +18,40 @@ fi
 }
 
 eval "$(hub alias -s)"
+export EDITOR="nvim"
+export GOPATH=/Users/colbyaley/development
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
-export EDITOR="vim"
-export PATH=$PATH
-export GOPATH=/Users/ca/sites/Go
-export PATH=$PATH
+export PATH=/opt/homebrew/opt/python@3.11/libexec/bin:$PATH
+export PATH="$PATH/Users/colbyaley/.rbenv/bin"
+export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:/Applications/Postgres.app/Contents/MacOS/bin"
 export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:/Users/ca/npm/bin"
-export PATH="$PATH:/Users/ca/eb"
+export PATH="$PATH:/Users/colbyaley/npm/bin"
+export PATH="$PATH:/Users/colbyaley/eb"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export ZK_BIN_PATH=/Users/ca/Sites/immunio/kafka_2.10-0.8.2.1/bin/
-export KAFKA_BIN_PATH=/Users/ca/Sites/immunio/kafka_2.10-0.8.2.1/bin/
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+alias vim='nvim'
+alias vi='nvim'
+alias be='bundle exec'
+alias wd='bin/with_docker'
+alias wdt='bin/with_docker_test'
+
+# Clearbit Workflow
+switch_env() {
+  eval "$(cb env "$1")" && echo $1 > ~/.clearbit-env
+}
+
+dev() { switch_env 'us-west-1.dev-2' && echo "Switched to development"; }
+staging() { switch_env 'us-west-1.staging-2' && echo "Switched to staging"; }
+production() { switch_env 'us-west-1.prod' && echo "Swiched to production"; }
+y() { yarn --cwd client $1; }
+
+changes() {
+  vi -O $(git status --porcelain | awk '{print $2}')
+}
+
+bindkey "^[[" beginning-of-line
+bindkey "^[[" end-of-line

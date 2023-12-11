@@ -20,7 +20,7 @@
   pr = !git push origin $(git rev-parse --abbrev-ref HEAD) && open http://github.com/webarmor/$(basename $PWD)/compare/master...$(git rev-parse --abbrev-ref HEAD)
   amend = commit -a --amend
 [core]
-  excludesfile = /Users/ca/.gitignore_global
+	excludesfile = /Users/colbyaley/.gitignore
   editor = atom --wait
 [init]
   templatedir = ~/.git-templates
