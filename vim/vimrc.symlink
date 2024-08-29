@@ -7,13 +7,10 @@ au BufNewFile,BufRead *.ts setlocal filetype=typescript
 filetype plugin on
 filetype plugin indent on
 set backupcopy=yes
-set clipboard=unnamed
+set clipboard+=unnamedplus
 set sw=2
 set nowrap
 set smarttab
-set expandtab
-set tabstop=2
-set softtabstop=2
 set number
 set backspace=indent,eol,start
 set winwidth=79
@@ -21,8 +18,8 @@ set winheight=50
 set shell=/bin/zsh
 let ruby_space_errors = 1
 
-set background=dark
-colorscheme solarized
+" tabs
+set ts=2 sw=2 sts=2 et
 
 " Ctrlp
 let g:ctrlp_tabpage_position = 'ac'
@@ -32,8 +29,8 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " Prettier
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql,*.jsx,*.tsx PrettierAsync
 
 nnoremap zz ZZ " quickly save and quit out
 nnoremap ; :
@@ -42,16 +39,6 @@ nnoremap ; :
 set list
 set lcs=tab:>>
 set lcs+=trail:.
-
-map <C-n> :NERDTreeFind<CR>
-map <C-T> :NERDTreeFind<CR>
-map <C-.> :NERDTreeFind<CR>
-
-" Close all buffers
-nnoremap bq :bufdo q<CR>
-
-" Highlight all results when searching
-set hlsearch
 
 if bufname("%") != ".html"
   " Keep lines under 80 columns
@@ -94,20 +81,7 @@ if bufname("%") =~ ".rb"
   set tabstop=2 softtabstop=4 shiftwidth=2 expandtab
 end
 
-" Close NERDTree when last buffer is closed
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
-
-let g:airline_theme='solarized'
-let gairline_solarized_bg='dark'
+if bufname("%") =~ ".js$"
+  set autoindent
+  set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+end
